@@ -1,7 +1,7 @@
 var amqp = require('amqp');
 
 var endCon = amqp.createConnection({
-    url: "amqp://xpzajppy:SyJO8G72iwJDgRujxlq0O3y4VXFn9q_8@baboon.rmq.cloudamqp.com/xpzajppy"
+    url: "amqpURL"
 });
 
 endCon.on("error", function() {

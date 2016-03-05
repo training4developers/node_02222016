@@ -1,42 +1,34 @@
 "use strict";
 
-var request = require("request");
+// world of promises...
 
-request({
-	url: "http://localhost:8080/api/widgets",
-	method: "GET"
-}, function(err, data) {
+// undefined = resolved promise
+// any other value = resolved promise
+// promise = ? could be either resolved or rejected
+// throw Error = rejected promise
+// return Promise.reject() = rejected promise
 
-	if (err) {
-		console.error(err);
-		return;
-	}
 
-	console.log(data.body);
+new Promise(function(resolve, reject) {
 
-});
+	resolve("first one");
 
-request({
-	url: "http://localhost:8080/api/widgets",
-	method: "POST",
-	headers: {
-		"Content-Type": "application/json"
-	},
-	json: true,
-	body: {
-		name: "Tiny Purple Widget",
-		description: "A tiny, purple widget.",
-		color: "purple",
-		size: "tiny",
-		quantity: 12
-	}
-}, function(err, data) {
 
-	if (err) {
-		console.error(err);
-		return;
-	}
+}).then(function(results) {
 
-	console.log(data.body);
+
+
+	console.log("first then");
+	//throw Error("Kim Jung-Un ordered the nukes ready to launch...");
+	return Promise.reject("Kim Jung-Un ordered the nukes ready to launch...")
+	//return results;
+
+}).then(function(results) {
+
+	console.log("second then");
+
+}).catch(function(nukes) {
+	console.dir(nukes);
+	console.log("THAAD shoots down nuke...");
 
 });
